@@ -1,0 +1,80 @@
+html,
+body {
+}
+
+h1 {
+  font-size: 36px;
+}
+.fav__title {
+  text-align: center;
+  color: #0e0246;
+
+  margin-top: 5rem;
+  font-weight: 600;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: calc(100vh - 635px);
+
+  margin-bottom: 5em;
+}
+
+.fav__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #62c8ff;
+  border-radius: 10px;
+  width: 550px;
+  flex-wrap: wrap;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  gap: 2rem;
+  padding: 1rem;
+}
+.fav__row {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: space-between;
+  width: 460px;
+  height: 95px;
+  background: rgb(255, 255, 255);
+  border-radius: 0.4em;
+  box-shadow: 0.3em 0.3em 0.7em #00000015;
+  gap: 2rem;
+}
+
+.logo__and__name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cryp__image {
+  width: 50px;
+}
+.currency__name {
+  font-size: 24px;
+}
+
+.delete__button {
+  align-self: flex-end;
+}
+.delete__button__section {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+}

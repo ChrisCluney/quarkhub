@@ -1,0 +1,47 @@
+
+.list__currency{
+    min-height: calc(100vh - 635px)
+}
+
+
+
+
+.coin__thumb{
+    // box-shadow: 2px 3px 18px rgba(#262631,0.4);
+    transition: all 200ms ease-in-out;
+    border-radius: 5px;
+
+
+
+    &:hover {
+        transform: translateY(-1rem);
+        box-shadow: 2px 3px 18px rgba(255,255,255,0.4);
+      }
+}
+
+.coin__link{
+    text-decoration: none;
+
+
+
+    link{
+        text-decoration: none;
+    }
+}
+
+
+
+
+span{
+
+
+a:visited 
+{
+    text-decoration: none; 
+    decoration: none; 
+}
+
+&:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+}
+}

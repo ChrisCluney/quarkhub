@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+
+
+
+.login__box{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+position: absolute;
+flex-wrap: wrap;
+    top:0;
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    margin: auto; 
+    gap: 2rem;
+    
+}
+
+.p-4_box{
+    gap: 3em;
+}

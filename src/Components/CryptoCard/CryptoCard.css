@@ -1,0 +1,94 @@
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+
+    
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    
+}
+a {
+    color: #5b616e;
+
+    
+  }
+.card__section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    font-size: 16px;
+    
+}
+
+.crypto-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 235px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    border-radius: 0.4em;
+    box-shadow: 0.3em 0.3em 0.7em #00000015;
+    transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: rgb(250, 250, 250) 0.2em solid;
+    padding: .3em;
+    gap: .5rem;
+    justify-content:start;
+    
+    
+}
+
+
+.top_row{
+    display: flex;
+justify-content: space-between;
+}
+.symbol__pic{
+    
+
+}
+.market__num{
+
+}
+.price__card{
+
+}
+.market_move{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+ margin: auto;
+ font-size:larger;
+ float: inline-start
+}
+
+
+.fav-card img{
+    height: 75px;
+    width: 75px;
+}
+   
+   .fav-card:hover {
+    border: #23eaff 0.1em solid;
+   }
+
+
+
+
+.crypto-card img{
+    height: 50px;
+    width: 50px;
+}
+   
+   .crypto-card:hover {
+    border: #23eaff 0.3em solid;
+   }
+
+
+

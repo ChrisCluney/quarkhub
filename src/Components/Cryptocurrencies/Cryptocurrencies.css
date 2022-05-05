@@ -1,0 +1,34 @@
+.list__currency {
+  min-height: calc(100vh - 635px);
+}
+
+.coin__thumb {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+}
+
+.coin__thumb:hover {
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
+  -webkit-box-shadow: 2px 3px 18px rgba(255, 255, 255, 0.4);
+          box-shadow: 2px 3px 18px rgba(255, 255, 255, 0.4);
+}
+
+.coin__link {
+  text-decoration: none;
+}
+
+.coin__link link {
+  text-decoration: none;
+}
+
+span a:visited {
+  text-decoration: none;
+  decoration: none;
+}
+
+span:focus, span:hover, span:visited, span:link, span:active {
+  text-decoration: none;
+}
+/*# sourceMappingURL=Cryptocurrencies.css.map */

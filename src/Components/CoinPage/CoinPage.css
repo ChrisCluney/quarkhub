@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.coin__info__size {
+  margin-bottom: 4em;
+  margin-left: 5em;
+  margin-right: 4em;
+  max-width: 60%;
+}
+
+.day__button {
+  cursor: pointer;
+}
