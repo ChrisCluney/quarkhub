@@ -25,8 +25,12 @@ import { doc, setDoc} from "firebase/firestore"
 import { collection, addDoc } from "firebase/firestore"
 import { db } from '../../firebase';
 import { Link } from 'react-router-dom';
-import BasicAlerts from '../../config/MuiAlert';
+
 import "./Cryptocurrencies.css"
+
+
+
+
 
 
 export function numberWithCommas(x) {
@@ -42,6 +46,12 @@ export default function Cryptocurrencies() {
 
   const {user} = useUserAuth()
   // console.log(user.uid)
+
+  
+
+
+
+
 
   const useStyles = styled({
     row: {
@@ -97,7 +107,7 @@ export default function Cryptocurrencies() {
 
 
 
-console.log(BasicAlerts())
+
 
 
   const handleFavorite = async (user, currency, image) =>{

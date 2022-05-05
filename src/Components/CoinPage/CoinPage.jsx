@@ -134,7 +134,7 @@ export const CoinPage = () => {
                   }}
                 >
                   {" "}
-                  $ {numberWithCommas(coin?.market_data.current_price.usd)}
+                  $ {numberWithCommas(coin?.market_data.current_price.usd.toFixed(2))}
                 </Typography>
               </span>
               <span style={{ display: "flex" }}>

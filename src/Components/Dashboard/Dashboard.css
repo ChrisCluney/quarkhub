@@ -1,29 +1,56 @@
-
 .main {
   display: flex;
   flex-wrap: wrap;
-  
+
   align-items: center;
   justify-content: center;
   width: 50%;
-  top:0;
-  bottom: 0; 
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  margin: auto; 
-  
-  
+  margin: auto;
 }
 
-.container_dash{
-    min-height: 100%;
-    
+.container_dash {
+  min-height: 100%;
 }
 
-.front__imgs{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.front__imgs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.apple__pic {
+  width: 750px;
+  height: 500px;
+}
+
+.top__ten__coins {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #0e0246;
+  margin-top: 1em;
+  /* width: 50%; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+  .apple__pic {
+    width: 375px;
+    height: 275px;
+  }
+  .robot__pic {
+    width: 375px;
+    height: 350px;
+  }
 }

@@ -23,7 +23,7 @@ export default function CryptoCard({name, image, market, price, price_change}) {
       
       <div className="price__card"><p>${price}</p></div>
       
-      <div className="market_move"><p style={{color: Math.sign(price_change) === -1 ? "red" : "#0d8451"}}>{(price_change)}%</p></div>
+      <div className="market_move"><p style={{color: Math.sign(price_change) < 0 ? "#cf202f" : "#0d8451"}}>{(price_change)}%</p></div>
       
       
       

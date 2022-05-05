@@ -131,7 +131,7 @@ const handleDelete = async (id) => {
           
         })}
         </div>
-          <h1>{coin?.id}</h1>
+          {/* <h1>{coin?.id}</h1> */}
     </div></>
   )
 }
