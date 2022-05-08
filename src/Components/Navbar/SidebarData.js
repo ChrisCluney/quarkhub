@@ -31,10 +31,4 @@ export const SidebarData = [
     icon: <FaIcons.FaRegNewspaper />,
     cName: "nav-text",
   },
-  {
-    title: "Logout",
-    path: "/",
-    icon: <IoIcons.IoMdLogOut />,
-    cName: "nav-text",
-  },
 ];

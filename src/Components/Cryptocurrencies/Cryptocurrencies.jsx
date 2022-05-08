@@ -1,10 +1,11 @@
-import React, {useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-import { styled } from '@mui/material'
-import { Pagination } from '@mui/material'
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Container,
+import { styled } from "@mui/material";
+import { Pagination } from "@mui/material";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import {
+  Container,
   ThemeProvider,
   TableCell,
   LinearProgress,
@@ -17,41 +18,33 @@ import { Container,
   TableContainer,
   Table,
   Paper,
-} from '@mui/material'
-import { useNavigate } from 'react-router'
-import { useUserAuth } from '../../context/UserAuthContext'
-import { useContext } from 'react'
-import { doc, setDoc} from "firebase/firestore"
-import { collection, addDoc } from "firebase/firestore"
-import { db } from '../../firebase';
-import { Link } from 'react-router-dom';
-
-import "./Cryptocurrencies.css"
-
-
-
-
-
+} from "@mui/material";
+import { useNavigate } from "react-router";
+import { useUserAuth } from "../../context/UserAuthContext";
+import { useContext } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import "./Cryptocurrencies.css";
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
 
 export default function Cryptocurrencies() {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-
-  const {user} = useUserAuth()
+  const [open, setOpen] = useState(false);
+  const [curr, setCurr] = useState("");
+  const { user } = useUserAuth();
   // console.log(user.uid)
-
-  
-
-
-
-
 
   const useStyles = styled({
     row: {
@@ -81,11 +74,11 @@ export default function Cryptocurrencies() {
     },
   });
 
-
   const fetchCoins = async () => {
     setLoading(true);
-    const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`);
-    
+    const { data } = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`
+    );
 
     setCoins(data);
     setLoading(false);
@@ -104,50 +97,69 @@ export default function Cryptocurrencies() {
     );
   };
 
+  const handleClick = () => {
+    setOpen(true);
+  };
 
+  const handleFavorite = async (user, currency, image) => {
+    setCurr(currency);
+    //   await setDoc(doc(db, "Favorites"), {
+    //     uid: user,
+    //     currency: currency
+    //   });
+    // }
 
+    handleClick();
 
+    try {
+      const docRef = await addDoc(collection(db, `${user}`), {
+        currency: currency,
+        image: image,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
 
-  const handleFavorite = async (user, currency, image) =>{
-   
-  //   await setDoc(doc(db, "Favorites"), {
-  //     uid: user,
-  //     currency: currency
-  //   });
-  // }
-   alert(`${currency} has been added to your favorites`)
-    
-  try {
-    const docRef = await addDoc(collection(db, `${user}`), {
-      
-      currency: currency,
-      image: image
-    });
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-      
-
-
-
-
-  }
-
- 
-
-
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container style={{ textAlign: "center" }}
-                  className="list__currency">
-        <Typography
-          variant="h4"
-          style={{ margin: 18, fontFamily: "Inter" }}
-        >
+      <div>
+        <Snackbar
+          open={open}
+          autoHideDuration={4000}
+          onClose={handleClose}
+          message={`${curr} is added to your favorites!`}
+          action={action}
+        />
+      </div>
+
+      <Container style={{ textAlign: "center" }} className="list__currency">
+        <Typography variant="h4" style={{ margin: 18, fontFamily: "Inter" }}>
           Cryptocurrency Prices by Market Cap
         </Typography>
         <TextField
@@ -163,7 +175,13 @@ export default function Cryptocurrencies() {
             <Table aria-label="simple table">
               <TableHead style={{ backgroundColor: "#0e0246" }}>
                 <TableRow>
-                  {["Coin", "Price", "24h Change", "Market Cap", "Favorite"].map((head) => (
+                  {[
+                    "Coin",
+                    "Price",
+                    "24h Change",
+                    "Market Cap",
+                    "Favorite",
+                  ].map((head) => (
                     <TableCell
                       style={{
                         color: "white",
@@ -198,44 +216,45 @@ export default function Cryptocurrencies() {
                             gap: 15,
                           }}
                         >
-                          
-                          
                           <Link to={`../coins/${row.id}`}>
-                          <img
-                            src={row?.image}
-                            alt={row.name}
-                            height="50"
-                            style={{ marginBottom: 10 }}
-                            className="coin__thumb"
-                          /></Link>
+                            <img
+                              src={row?.image}
+                              alt={row.name}
+                              height="50"
+                              style={{ marginBottom: 10 }}
+                              className="coin__thumb"
+                            />
+                          </Link>
 
-                          <Link 
-                          style={{textDecoration: 'none'}}
-                          to={`../coins/${row.id}`}>
-                          <div
-                          
-                            style={{ display: "flex", flexDirection: "column" }}
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to={`../coins/${row.id}`}
                           >
-                            <span 
-                              className='coin__link'
+                            <div
                               style={{
-                                textTransform: "uppercase",
-                                fontSize: 22,
+                                display: "flex",
+                                flexDirection: "column",
                               }}
                             >
-                              {row.symbol}
-                            </span>
-                            <span 
-                            className='coin__link'
-                            style={{ color: "darkgrey" }}>
-                              {row.name}
-                            </span>
-                          </div></Link>
-
-
+                              <span
+                                className="coin__link"
+                                style={{
+                                  textTransform: "uppercase",
+                                  fontSize: 22,
+                                }}
+                              >
+                                {row.symbol}
+                              </span>
+                              <span
+                                className="coin__link"
+                                style={{ color: "darkgrey" }}
+                              >
+                                {row.name}
+                              </span>
+                            </div>
+                          </Link>
                         </TableCell>
 
-                        
                         <TableCell align="right">
                           {" "}
                           {numberWithCommas(row.current_price.toFixed(2))}
@@ -258,13 +277,12 @@ export default function Cryptocurrencies() {
                           M
                         </TableCell>
                         <TableCell align="right">
-                        <StarBorderIcon
-                            
-                            
+                          <StarBorderIcon
                             height="50"
-                            style={{ marginBottom: 10, cursor:"pointer" }}
-                            onClick={() => handleFavorite(user.uid, row.id, row.image)}
-                            
+                            style={{ marginBottom: 10, cursor: "pointer" }}
+                            onClick={() =>
+                              handleFavorite(user.uid, row.id, row.image)
+                            }
                           />
                         </TableCell>
                       </TableRow>
@@ -273,9 +291,9 @@ export default function Cryptocurrencies() {
               </TableBody>
             </Table>
           )}
-        </TableContainer> 
+        </TableContainer>
 
-         {/* Comes from @material-ui/lab */}
+        {/* Comes from @material-ui/lab */}
         <Pagination
           count={(handleSearch()?.length / 10).toFixed(0)}
           style={{
@@ -295,37 +313,15 @@ export default function Cryptocurrencies() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // useEffect(() => {
 //   const getList = async () => {
 //     const querySnapshot = await getDocs(collection(db, "Favorites"));
 //     querySnapshot.forEach((doc) => {
 //       console.log(`${doc.id} => ${doc.data()}`);
-//     }); 
-
-
-
+//     });
 
 //   }
-
-  
-  
 
 //   getList()
 
 // }, [])
-
